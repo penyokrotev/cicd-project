@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'jacoco'
 	id 'java'
+	id "org.sonarqube" version "3.3"
 }
 
 group = 'com.example'
@@ -32,3 +33,18 @@ jacocoTestReport {
     xml.enabled true
   }
 }
+test.finalizedBy jacocoTestReport
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "penyokrotev_cicd-project"
+    property "sonar.organization", "penyokrotev"
+    property "sonar.host.url", "https://sonarcloud.io"
+	property "sonar.login", "5c613f488b1d69f76a61682cf2a6859ea61a7add"
+  }
+}
+
+tasks.named('sonarqube').configure {
+    dependsOn test
+}
+
