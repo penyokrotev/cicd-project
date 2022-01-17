@@ -40,7 +40,6 @@ sonarqube {
     property "sonar.projectKey", "penyokrotev_cicd-project"
     property "sonar.organization", "penyokrotev"
     property "sonar.host.url", "https://sonarcloud.io"
-	property "sonar.login", "fccac1a3a28977894b393d0fe84a43c6849a990f"
   }
 }
 
