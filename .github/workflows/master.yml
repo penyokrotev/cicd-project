@@ -16,7 +16,6 @@ jobs:
       uses: nikitasavinov/checkstyle-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        reporter: 'github-push-master'
         tool_name: 'testtool'
   zap_scan:
     runs-on: ubuntu-latest
