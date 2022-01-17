@@ -85,4 +85,4 @@ jobs:
     - name: Scan image for vulnerabilities     
       uses: azure/container-scan@v0
       with: 
-        image-name: penyo/devops-u11:$GITHUB_SHA
+        image-name: "penyo/devops-u11:$GITHUB_SHA"
