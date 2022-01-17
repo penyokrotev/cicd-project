@@ -86,3 +86,4 @@ jobs:
       uses: azure/container-scan@v0
       with: 
         image-name: penyo/devops-u11:${{ github.sha }}
+      continue-on-error: true  
