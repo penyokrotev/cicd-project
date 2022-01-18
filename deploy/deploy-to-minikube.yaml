@@ -2,29 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
     name: example
+    labels:
+      app: example
 spec:
-    selector:
-        matchLabels:
-            app: example
-    replicas: 2
-    template:
-        metadata:
-            labels:
-                app: example
-        spec:
-            containers:
-                - name: example-api
-                  imagePullPolicy: Never
-                  image: local/example:latest
-                  resources:
-                      limits:
-                          cpu: 50m
-                          memory: 100Mi
-                      requests:
-                          cpu: 25m
-                          memory: 10Mi
-                  ports:
-                      - containerPort: 8080
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - image: local/example:latest
+        name: example
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+
+
 ---
 apiVersion: v1
 kind: Service
