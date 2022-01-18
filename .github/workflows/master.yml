@@ -15,6 +15,7 @@ jobs:
       with:
           minikube version: 'v1.24.0'
           kubernetes version: 'v1.23.0'
+          driver: docker
           github token: ${{ secrets.GITHUB_TOKEN }}
     - name: Interact with the cluster
       run: kubectl get nodes
