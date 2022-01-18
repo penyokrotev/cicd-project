@@ -29,7 +29,7 @@ jobs:
         echo -n "verifying images:"
         docker images        
     - name: Deploy to minikube
-      run:
+      run: |
         kubectl apply -f deploy/deploy-to-minikube.yaml
         kubectl wait --for=condition=Ready pods --timeout=300s -l "app=example"
         kubectl get all
