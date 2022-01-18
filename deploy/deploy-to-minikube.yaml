@@ -27,7 +27,7 @@ kind: Service
 metadata:
     name: example
 spec:
-    type: NodePort
+    type: LoadBalancer
     selector:
         app: example
     ports:
