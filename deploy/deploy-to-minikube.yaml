@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: example
+spec:
+    selector:
+        matchLabels:
+            app: example
+    replicas: 2
+    template:
+        metadata:
+            labels:
+                app: example
+        spec:
+            containers:
+                - name: example-api
+                  imagePullPolicy: Always
+                  image: penyo/devops-u11:c3ecf337f171b66055ad10ef4fb9fa3346625727
+                  resources:
+                      limits:
+                          cpu: 50m
+                          memory: 100Mi
+                      requests:
+                          cpu: 25m
+                          memory: 10Mi
+                  ports:
+                      - containerPort: 8080
+            imagePullSecrets:
+              - name: my-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: example
+spec:
+    type: NodePort
+    selector:
+        app: example
+    ports:
+        - port: 8080
+          targetPort: 8080
