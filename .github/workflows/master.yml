@@ -33,6 +33,8 @@ jobs:
         kubectl apply -f deploy/deploy-to-minikube.yaml
     - name: Test service URLs
       run: |
+        kubectl get svc -o wide
+        kubectl get ep -o wide
         minikube service list
         minikube service example --url
         echo "------------------opening the service------------------"
