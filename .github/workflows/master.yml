@@ -35,10 +35,12 @@ jobs:
       run: |
         kubectl get svc -o wide
         kubectl get ep -o wide
+        export CLUSTER_IP=$(kubectl get service example --output='jsonpath={.spec.clusterIPs[0]}')
+        curl -v http://$CLUSTER_IP:8080
         minikube service list
         minikube service example --url
         echo "------------------opening the service------------------"
-        curl $(minikube service example --url)        
+        curl -v $(minikube service example --url)        
        
 
   checkstyle_job:
