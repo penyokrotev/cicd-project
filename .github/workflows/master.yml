@@ -31,12 +31,14 @@ jobs:
     - name: Deploy to minikube
       run:
         kubectl apply -f deploy/deploy-to-minikube.yaml
+        kubectl wait --for=condition=Ready pods --timeout=300s -l "app=example"
+        kubectl get all
     - name: Test service URLs
       run: |
         kubectl get svc -o wide
         kubectl get ep -o wide
         export CLUSTER_IP=$(kubectl get service example --output='jsonpath={.spec.clusterIPs[0]}')
-        curl -v http://$CLUSTER_IP:8080
+        kubectl run -i --rm --image=curlimages/curl --restart=Never test-curl -- -sSL http://$CLUSTER_IP:8080
         minikube service list
         minikube service example --url
         echo "------------------opening the service------------------"
