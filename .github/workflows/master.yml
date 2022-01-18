@@ -20,7 +20,7 @@ jobs:
         eval $(minikube -p minikube docker-env)
         docker build -f ./Dockerfile -t local/example .
         echo -n "verifying images:"
-        docker images  
+        docker images        
     - name: Deploy to minikube
       run:
         kubectl apply -f deploy/deploy-to-minikube.yaml
@@ -30,6 +30,7 @@ jobs:
         minikube service example --url
         echo "------------------opening the service------------------"
         curl $(minikube service example --url)        
+       
 
   checkstyle_job:
     runs-on: ubuntu-latest
