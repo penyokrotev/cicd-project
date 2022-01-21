@@ -24,18 +24,14 @@ jobs:
     - name: Create a secret for Dockerhub
       run: | 
         kubectl create secret docker-registry my-secret --docker-server=https://hub.docker.com --docker-username=${{ secrets.DOCKER_USERNAME }} --docker-password=${{ secrets.DOCKER_PASSWORD }}
-        kubectl get secret
-    - name: Pull image from Dockerhub
-      run: |
-        export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
-        #docker build -f ./Dockerfile -t local/example .
-        echo -n "verifying images:"
-        docker images        
+        kubectl get secret    
     - name: Deploy to minikube
       run: |
         kubectl apply -f deploy/deploy-to-minikube.yaml
-        sleep 60
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        echo -n "verifying images:"
+        docker images
         kubectl get all
     - name: Test service URLs
       run: |
@@ -43,11 +39,7 @@ jobs:
         kubectl get ep -o wide
         echo "------------------opening the service------------------"
         export CLUSTER_IP=$(kubectl get service example --output='jsonpath={.spec.clusterIPs[0]}')
-        kubectl run -i --rm --image=curlimages/curl --restart=Never test-curl -- -sSL http://$CLUSTER_IP:8080
-        #minikube service list
-        #minikube service example --url
-        #curl -v $(minikube service example --url)        
-       
+        kubectl run -i --rm --image=curlimages/curl --restart=Never test-curl -- -sSL http://$CLUSTER_IP:8080     
 
   checkstyle_job:
     runs-on: ubuntu-latest
