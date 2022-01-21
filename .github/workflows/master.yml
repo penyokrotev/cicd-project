@@ -92,7 +92,7 @@ jobs:
       continue-on-error: true
       
   deploy:
-    name: Minikube Cluster interaction
+    name: Minikube Cluster deployment
     runs-on: ubuntu-latest
     needs: build
     steps:
