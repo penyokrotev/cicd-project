@@ -14,7 +14,7 @@ spec:
         app: example
     spec:
       containers:
-      - image: penyo/devops-u11:${{ github.sha }}
+      - image: penyo/devops-u11:${TAG}
         name: example
         imagePullPolicy: Always
         ports:
