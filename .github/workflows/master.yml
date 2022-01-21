@@ -21,11 +21,15 @@ jobs:
       run: kubectl get nodes
     - name: Try the cluster !
       run: kubectl get pods -A
-    - name: Build image
+    - name: Create a secret for Dockerhub
+      run: | 
+        kubectl create secret docker-registry my-secret --docker-server=https://hub.docker.com --docker-username=${{ secrets.DOCKER_USERNAME }} --docker-password=${{ secrets.DOCKER_PASSWORD }}
+        kubectl get secret
+    - name: Pull image from Dockerhub
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
-        docker build -f ./Dockerfile -t local/example .
+        #docker build -f ./Dockerfile -t local/example .
         echo -n "verifying images:"
         docker images        
     - name: Deploy to minikube
