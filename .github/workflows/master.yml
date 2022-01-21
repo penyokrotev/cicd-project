@@ -115,7 +115,10 @@ jobs:
         kubectl get secret    
     - name: Deploy to minikube
       run: |
-        kubectl apply -f deploy/deploy-to-minikube.yaml
+        echo TAG=$GITHUB_SHA > file.txt
+        export $(xargs < file.txt)
+        echo $TAG
+        envsubst < deploy/deploy-to-minikube.yaml | kubectl apply -f -
         sleep 30
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
