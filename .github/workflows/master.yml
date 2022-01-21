@@ -28,6 +28,7 @@ jobs:
     - name: Deploy to minikube
       run: |
         kubectl apply -f deploy/deploy-to-minikube.yaml
+        sleep 30
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
         echo -n "verifying images:"
@@ -35,6 +36,7 @@ jobs:
         kubectl get all
     - name: Test service URLs
       run: |
+        minikube service example
         kubectl get svc -o wide
         kubectl get ep -o wide
         echo "------------------opening the service------------------"
