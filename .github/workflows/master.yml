@@ -92,19 +92,21 @@ jobs:
       continue-on-error: true
       
   deploy-test:
+    name: Deploy on Test env
     runs-on: ubuntu-latest
     needs: build
     steps:
     - run: echo "Deploy to TEST"
  
   automation-tests:
+    name: Execution of Automation Tests
     runs-on: ubuntu-latest
     needs: deploy-test
     steps:
     - run: echo "Executing Automation Tests"
       
   deploy-prod:
-    name: Minikube Cluster deployment
+    name: Minikube Cluster production deployment
     runs-on: ubuntu-latest
     needs: automation-tests
     steps:
