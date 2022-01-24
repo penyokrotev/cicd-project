@@ -31,7 +31,7 @@ Student: Penyo Krotev
 
 **Good practices:**
 
-Local Build; Sonarlint plugin; Git secrets
+Local Build; Sonarlint plugin; Git secrets; Branches naming convention: [short-lived branch]/[Number_of_Jira Ticket]
 
 **Future Improvements:**
 * Add a DB to the project; Test that DB
