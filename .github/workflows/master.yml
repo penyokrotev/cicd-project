@@ -5,21 +5,9 @@ on:
       - master
 jobs:
 
-  update_release_draft:
-    name: Release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Try git tag
-        uses: pkgdeps/git-tag-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_repo: ${{ github.repository }}
-          git_commit_sha: ${{ github.sha }}
-          version: "1.0.0"
-          git_tag_prefix: "v"
+
   checkstyle_job:
     runs-on: ubuntu-latest
-    needs: update_release_draft
     name: Checkstyle job
     steps:
     - name: Checkout
