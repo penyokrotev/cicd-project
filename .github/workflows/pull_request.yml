@@ -92,6 +92,18 @@ jobs:
       
   deploy-dev:
     runs-on: ubuntu-latest
-    needs: sast
+    needs: build
     steps:
     - run: echo "Deploy to DEV"
+  
+  notification_without_optional_params:
+    needs: deploy-dev
+    name: MS Teams Notification
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - name: Microsoft Teams Notification
+        uses: skitionek/notify-microsoft-teams@master
+        if: always()
+        with:
+          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }} 
