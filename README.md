@@ -2,7 +2,7 @@ Final project (Java SpringBoot) for DevOps-u11 group in Telerik Academy
 
 Student: Penyo Krotev
 
-Diagram of the project:
+Diagram:
 
 ![alt text](https://github.com/penyokrotev/cicd-project/blob/master/Docs/Pipeline.drawio(1).png)
 
@@ -23,3 +23,8 @@ Registry: DockerHub
 Deployment Environment - Minikube as Github Action
 
 Notification System: MS Teams
+
+
+Good practices:
+
+Local Build; Sonarlint plugin; Git secrets
